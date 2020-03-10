@@ -8,12 +8,12 @@ default: &default
 
 development:
   <<: *default
-  database: db/dev/bujo
+  database: bujo_dev
 
 test:
   <<: *default
-  database: db/test/bujo
+  database: bujo_test
 
 production:
   <<: *default
-  database: db/prd/bujo
+  database: bujo_prd
