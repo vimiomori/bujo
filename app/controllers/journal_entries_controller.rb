@@ -1,15 +1,14 @@
 class JournalEntriesController < ApplicationController
+  before_action :set_journal_entry, only: [:show, :edit, :update, :destroy]
 
   def index
     @journal_entries = JournalEntry.all
   end
 
   def show
-    @journal_entry = JournalEntry.find(params[:id])
   end
 
   def edit
-    @journal_entry = JournalEntry.find(params[:id])
   end
   
   def new
@@ -26,7 +25,6 @@ class JournalEntriesController < ApplicationController
   end
 
   def update 
-    @journal_entry = JournalEntry.find(params[:id])
     if @journal_entry.update(journal_entry_params)
       flash[:notice] = "Journal entry updated!"
       redirect_to @journal_entry
@@ -36,13 +34,16 @@ class JournalEntriesController < ApplicationController
   end
 
   def destroy
-    @journal_entry = JournalEntry.find(params[:id])
     @journal_entry.destroy
     flash[:notice] = "Journal entry deleted!"
     redirect_to journal_entries_path
   end
 
   private
+    def set_journal_entry
+      @journal_entry = JournalEntry.find(params[:id])
+    end
+
     def journal_entry_params
       params.require(:journal_entry).permit!
     end
