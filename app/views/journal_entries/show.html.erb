@@ -10,3 +10,6 @@
 <p>
   <%= @journal_entry.content %>
 </p>
+
+<%= link_to 'Edit', edit_journal_entry_path(params[:id]) %>
+<%= link_to 'Back To All', journal_entries_path %>

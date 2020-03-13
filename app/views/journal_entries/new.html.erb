@@ -1,28 +1,3 @@
 <h1> Create New Journal Entry </h1>
 
-<%= form_with model: @journal_entry, local: true do |f| %>
-  <% if @journal_entry.errors.any? %>
-    <div id="error_explanation">
-      <h2>
-        <%= pluralize(@journal_entry.errors.count, "error") %> prohibited
-        this article from being saved:
-      </h2>
-      <ul>
-        <% @journal_entry.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-  <p>
-    <%= f.label :title %>
-    <%= f.text_field :title %>
-  </p>
-    <%= f.date_field :date, :default => Date.today%>
-    <%= f.time_select :time, :default => Time.now%>
-  <p>
-    <%= f.label :content %>
-    <%= f.text_area :content %>
-  </p>
-    <%= f.submit "Save" %>
-<% end %>
+<%= render 'form' %>

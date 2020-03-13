@@ -1,0 +1,18 @@
+<h1> Journal Entries </h1>
+
+<table>
+  <tr>
+    <th width="100" style="text-align: left">Title</th>
+    <th style="text-align: left">Date</th>
+  <tr>
+  <% @journal_entries.each do |je| %>
+    <tr>
+      <td><%= link_to je.title, journal_entry_path(je) %></td>
+      <td><%= je.date %></td>
+      <td><%= link_to 'Edit', edit_journal_entry_path(je) %></td>
+      <td><%= link_to 'Delete', journal_entry_path(je), method: :delete, data: { confirm: "Are you sure?" }%></td>
+    </tr>
+  <% end %>
+</table>
+</br>
+<%= link_to 'Create New Entry', new_journal_entry_path %>
