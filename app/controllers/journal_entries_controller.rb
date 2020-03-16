@@ -2,7 +2,12 @@ class JournalEntriesController < ApplicationController
   before_action :set_journal_entry, only: [:show, :edit, :update, :destroy]
 
   def index
-    @journal_entries = JournalEntry.all
+    user_id = params[:id]
+    if user_id.present?
+      @journal_entries = @journal_entries.where(user_id: user_id) 
+    else  # TODO: Get current user somehow
+      @journal_entries = JournalEntry.all
+    end
   end
 
   def show
