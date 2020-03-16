@@ -1,14 +1,9 @@
 class JournalEntriesController < ApplicationController
-  before_action :set_journal_entry, only: [:show, :edit, :update, :destroy]
-  before_action :set_user, only: [:index, :new, :create]
+  before_action :set_journal_entry, only: [:show, :edit, :update, :destroy],
+                :set_user, only: [:index, :new, :create]
 
   def index
-    # if user_id.present?
-    #   @journal_entries = @journal_entries.where(user_id: user_id) 
-    # else  # TODO: Get current user somehow
-    #   @journal_entries = JournalEntry.all
-    # end
-    @journal_entries = @user.journal_entries
+    @journal_entries = @user.journal_entries.paginate(page: params[:page], per_page: 5)
   end
 
   def show
@@ -18,7 +13,6 @@ class JournalEntriesController < ApplicationController
   end
   
   def new
-    # @journal_entry = JournalEntry.new
     @journal_entry = @user.journal_entries.build
   end
 

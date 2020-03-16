@@ -2,9 +2,6 @@
   <div class="title">
     <h1> Journal Entries </h1>
   </div>
-  <div class="my_page">
-    <h4><%= link_to 'My Page', user_path(@user) %></h4>
-  </div>
 </div>
 
 <% @journal_entries.each do |je| %>
@@ -24,3 +21,4 @@
 <% end %>
 </br>
 <%= button_to 'Create New Entry', new_user_journal_entry_path(@user), method: :get%>
+<%= will_paginate @journal_entries %>

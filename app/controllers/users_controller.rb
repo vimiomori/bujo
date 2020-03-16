@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  skip_before_action :require_login, only: [:new, :create]
+  before_action :set_user, only: [:edit, :update, :show]
 
   def new
     @user = User.new
@@ -15,15 +17,12 @@ class UsersController < ApplicationController
   end
 
   def edit
-    set_user
   end
 
   def show 
-    set_user
   end
 
   def update
-    set_user
     if @user.update(user_params)
       flash[:success] = "#{@user.username}, your account has been successfully updated!"
       redirect_to user_journal_entries_path
