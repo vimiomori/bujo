@@ -1,0 +1,12 @@
+<%= form_with model: @user, local: true do |f| %>
+  <%= render 'shared/errors', obj: @user %>
+  <p>
+    <%= f.label :username %>
+    <%= f.text_field :username, placeholder: "Enter Username" %>
+    <%= f.label :email %>
+    <%= f.text_field :email, placeholder: "Enter Email" %>
+    <%= f.label :password %>
+    <%= f.password_field :password, placeholder: "Enter Password" %>
+  </p>
+    <%= f.submit(@user.new_record? ? "Save" : "Update Account") %>
+<% end %>

@@ -11,5 +11,5 @@
   <%= @journal_entry.content %>
 </p>
 
-<%= link_to 'Edit', edit_journal_entry_path(params[:id]) %>
-<%= link_to 'Back To All', journal_entries_path %>
+<%= link_to 'Edit', edit_user_journal_entry_path(@journal_entry) %>
+<%= link_to 'Back To All', user_journal_entries_path(@journal_entry.user_id) %>

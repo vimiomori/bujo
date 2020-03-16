@@ -1,18 +1,26 @@
-<h1> Journal Entries </h1>
+<div class="header">
+  <div class="title">
+    <h1> Journal Entries </h1>
+  </div>
+  <div class="my_page">
+    <h4><%= link_to 'My Page', user_path(@user) %></h4>
+  </div>
+</div>
 
-<table>
-  <tr>
-    <th width="100" style="text-align: left">Title</th>
-    <th style="text-align: left">Date</th>
-  <tr>
-  <% @journal_entries.each do |je| %>
-    <tr>
-      <td><%= link_to je.title, journal_entry_path(je) %></td>
-      <td><%= je.date %></td>
-      <td><%= link_to 'Edit', edit_journal_entry_path(je) %></td>
-      <td><%= link_to 'Delete', journal_entry_path(je), method: :delete, data: { confirm: "Are you sure?" }%></td>
-    </tr>
-  <% end %>
-</table>
+<% @journal_entries.each do |je| %>
+  <div class="entry-title">
+    <h2><%= link_to je.title, user_journal_entry_path(@user.id, je.id) %></h2>
+  </div>
+  <div class="entry-body">
+    <%= truncate(je.content, length: 100) %>
+    <small>Penned on <%= je.date.to_formatted_s(:short) %></small>
+  </div>
+  <div class="entry-actions">
+    <%= button_to 'Edit', edit_user_journal_entry_path(@user.id, je.id) %>
+  </div>
+  <div class="entry-actions">
+    <%= button_to 'Delete', user_journal_entry_path(@user.id, je.id), method: :delete, data: { confirm: "Are you sure?" } %>
+  </div>
+<% end %>
 </br>
-<%= link_to 'Create New Entry', new_journal_entry_path %>
+<%= button_to 'Create New Entry', new_user_journal_entry_path(@user), method: :get%>

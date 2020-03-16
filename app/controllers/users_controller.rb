@@ -8,9 +8,27 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       flash[:success] = "Welcome, #{@user.username}"
-      redirect_to journal_entries_path(user_params[:id])
+      redirect_to user_journal_entries_path(@user)
     else
       render 'new'
+    end
+  end
+
+  def edit
+    set_user
+  end
+
+  def show 
+    set_user
+  end
+
+  def update
+    set_user
+    if @user.update(user_params)
+      flash[:success] = "#{@user.username}, your account has been successfully updated!"
+      redirect_to user_journal_entries_path
+    else
+      render 'edit'
     end
   end
 
