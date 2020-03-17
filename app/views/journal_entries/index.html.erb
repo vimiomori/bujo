@@ -6,17 +6,17 @@
 
 <% @journal_entries.each do |je| %>
   <div class="entry-title">
-    <h2><%= link_to je.title, user_journal_entry_path(@user.id, je.id) %></h2>
+    <h2><%= link_to je.title, show_journal_entry_path(je.id) %></h2>
   </div>
   <div class="entry-body">
     <%= truncate(je.content, length: 100) %>
     <small>Penned on <%= je.date.to_formatted_s(:short) %></small>
   </div>
   <div class="entry-actions">
-    <%= button_to 'Edit', edit_user_journal_entry_path(@user.id, je.id) %>
+    <%= button_to 'Edit', edit_journal_entry_path(je.id), method: :get %>
   </div>
   <div class="entry-actions">
-    <%= button_to 'Delete', user_journal_entry_path(@user.id, je.id), method: :delete, data: { confirm: "Are you sure?" } %>
+    <%= button_to 'Delete', user_journal_entry_path(je.user_id, je.id), method: :delete, data: { confirm: "Are you sure?" } %>
   </div>
 <% end %>
 </br>

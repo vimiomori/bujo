@@ -25,7 +25,7 @@ class UsersController < ApplicationController
   def update
     if @user.update(user_params)
       flash[:success] = "#{@user.username}, your account has been successfully updated!"
-      redirect_to user_journal_entries_path
+      redirect_to user_journal_entries_path(@user)
     else
       render 'edit'
     end
@@ -37,7 +37,7 @@ class UsersController < ApplicationController
     end
 
     def user_params
-      params.require(:user).permit!
+      params.require(:user).permit(:username, :email, :password)
     end
 
 end

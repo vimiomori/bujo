@@ -1,6 +1,5 @@
-<%= form_with model: [@user, @journal_entry].compact, local: true do |f| %>
+<%= form_with model: [@user, @journal_entry].compact, method: method, local: true do |f| %>
   <%= render 'shared/errors', obj: @journal_entry %>
-  <%= render 'shared/errors', obj: @user %>
   <p>
     <%= f.label :title %>
     <%= f.text_field :title %>

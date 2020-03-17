@@ -1,6 +1,6 @@
 class JournalEntriesController < ApplicationController
   before_action :set_journal_entry, only: [:show, :edit, :update, :destroy]
-  before_action :set_user, only: [:index, :new, :create]
+  before_action :set_user, only: [:index, :new, :create, :destroy]
 
   def index
     @journal_entries = @user.journal_entries.paginate(page: params[:page], per_page: 5)
@@ -28,7 +28,7 @@ class JournalEntriesController < ApplicationController
   def update 
     if @journal_entry.update(journal_entry_params)
       flash[:notice] = "Journal entry updated!"
-      redirect_to @journal_entry
+      redirect_to show_journal_entry_path(@journal_entry)
     else
       render 'edit'
     end
@@ -37,7 +37,7 @@ class JournalEntriesController < ApplicationController
   def destroy
     @journal_entry.destroy
     flash[:notice] = "Journal entry deleted!"
-    redirect_to user_journal_entries_path
+    redirect_to user_journal_entries_path(@user)
   end
 
   private
@@ -50,7 +50,7 @@ class JournalEntriesController < ApplicationController
     end
 
     def journal_entry_params
-      params.require(:journal_entry).permit!
+      params.require(:journal_entry).permit(:title, :content, :date, :time, :user_id)
     end
 
 end
